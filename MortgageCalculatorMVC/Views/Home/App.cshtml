@@ -1,0 +1,113 @@
+﻿@model MortgageCalculatorMVC.Models.Loan
+
+
+<main class="flex-shrink-0 mt-0 p-3">
+    <div class="container mt-0 p-0">
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col">
+                <form asp-controller="Home" asp-action="App" method="post" class="row row-cols-1 gy-2 gx-3 bg-gray py-3 pt-1 pb-3">
+                    <div class="col">
+                        <label asp-for="Amount">Loan Amount</label><span id="fAmount" class="ms-3 pb-1"></span>
+                        <input id="loanAmount" asp-for="Amount" value="@Model.Amount" type="number" class="form-control" aria-label="Loan Amount">
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label>Term</label>
+                            <div class="col-md-6">
+                                <label asp-for="Term">Monthly</label>
+                                <input id="monthly" asp-for="Term" value="@Model.Term" type="number" class="form-control" aria-label="Monthly">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Yearly</label>
+                                <input id="yearly" asp-for="Yearly" value="@Model.Yearly" type="number" step="any" class="form-control" aria-label="Yearly">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label asp-for="Rate">Fixed Interest Rate</label>
+                        <input id="rate" asp-for="Rate" value="@Model.Rate" step="0.1" type="number" class="form-control" aria-label="Rate">
+                    </div>
+                    <div class="row m-0 p-0">
+                        <div class="col-md-6 mt-2">
+                            <label style="display: none;">Extra Monthly Payments</label>
+                            <input style="display: none;" id="extraPayment" type="number" value="0" class="form-control" aria-label="Extra Payments">
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-start justify-content-md-end mt-3">
+                            <button type="submit" id="btnSubmit" class="btn btn-outline-success btn-lg">Calculate</button>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-start justify-content-md-end mt-3">
+                            <button type="button" id="btnReset" class="btn btn-outline-success btn-lg">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+                <form id="formHeader" class="row row-cols-1 gy-2 gx-3">
+                    <div class="col-12 text-center">
+                        <p><i>Your Monthly Payments</i></p>
+                    </div>
+                    <div class="col-12 text-center mb-2">
+                        <div><span id="monthlyPayment" class="fw-bold fs-1">@Model.Payment.ToString("C")</span></div>
+                    </div>
+                    <div class="col-6">
+                        <span>Total Principal:</span>
+                    </div>
+                    <div class="col-6">
+                        <span id="totalPrincipal">@Model.Amount.ToString("C")</span>
+                    </div>
+                    <div class="col-6">
+                        <span>Total Interest</span>
+                    </div>
+                    <div class="col-6">
+                        <span id="totalInterest">@Model.TotalInterest.ToString("C")</span>
+                    </div>
+                    <div class="col-6">
+                        <span>Total Cost</span>
+                    </div>
+                    <div class="col-6">
+                        <span id="totalCost" class="fw-bold">@Model.TotalCost.ToString("C")</span>
+                    </div>
+                </form>
+                <div class="mt-5">
+                    Note: This does not include PMI, Property Taxes, Home Insurance, HOA and other fees.
+                    For a detailed cost analysis, visit the <a href="https://usmortgagecalculator.org/" target="_blank">US Mortgage Calculator</a>.
+                </div>
+            </div>
+        </div>
+        <div class="chart">
+            <!-- <canvas id="myChart"></canvas> -->
+        </div>
+        <hr>
+        @if(Model.Payments.Count > 0)
+        {
+            <div class="col-12">
+                <table class="table table-striped table-sm">
+                    <thead class="theadbg text-light">
+                        <tr>
+                            <th>Month</th>
+                            <th>Payment</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
+                            <th>Accrued Interest</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results">
+                        @foreach (var item in Model.Payments)
+                        {
+                            <tr>
+                                <td>@item.Month</td>
+                                <td>@item.Payment.ToString("C")</td>
+                                <td>@item.MonthlyPrincipal.ToString("C")</td>
+                                <td>@item.MonthlyInterest.ToString("C")</td>
+                                <td>@item.TotalInterest.ToString("C")</td>
+                                <td>@item.Balance.ToString("C")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <h5 id="codeLink"></h5>
+            </div> 
+        }
+    </div>
+</main>

@@ -1,0 +1,316 @@
+﻿
+<main class="flex-shrink-0 mt-5">
+    <div class="container py-4 px-5 mt-5">
+        <h2 class="border-1 border-bottom border-dark">The Code for the Mortgage Calculator</h2>
+        <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col-lg-8">
+                <h4 class="mt-4 pt-4">The Model</h4>
+                <pre class="line-numbers">
+                <code class="language-javascript">
+// Loan Model
+
+namespace MortgageCalculatorMVC.Models
+{
+    public class Loan
+    {
+        public decimal Amount { get; set; }
+        public decimal Rate { get; set; }
+        public int Term { get; set; }
+        public int Yearly { get; set; }
+        public decimal Payment { get; set; }
+        public decimal TotalInterest { get; set; }
+        public decimal TotalCost { get; set; }
+        public List&#60;LoanPayment> Payments { get; set; } = new List&#60;LoanPayment>();
+    }
+}
+
+// Loan Payments Model
+
+namespace MortgageCalculatorMVC.Models
+{
+    public class LoanPayment
+    {
+        public int Month { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
+        public decimal Payment { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C0}")]
+        public decimal MonthlyPrincipal { get; set; }
+        public decimal MonthlyInterest { get; set; }
+        public decimal TotalInterest { get; set; }
+        public decimal Balance { get; set; }
+    }
+}
+                </code>
+            </pre>
+<h4 class="mt-4 pt-4">The View</h4>
+<pre class="line-numbers">
+<code class="language-javascript">
+
+&#60;div class="container mt-0 p-0">
+    &#60;div class="row row-cols-1 row-cols-md-2">
+    &#60;div class="col">
+    &#60;form asp-controller="Home" asp-action="App" method="post" class="row row-cols-1 gy-2 gx-3 bg-gray py-3 pt-1 pb-3">
+    &#60;div class="col">
+    &#60;label asp-for="Amount">Loan Amount&#60;/label>&#60;span id="fAmount" class="ms-3 pb-1">&#60;/span>
+    &#60;input id="loanAmount" asp-for="Amount" value="&#64;Model.Amount" type="number" class="form-control" aria-label="Loan Amount">
+        &#60;/div>
+    &#60;div class="col">
+    &#60;div class="row">
+    &#60;label>Term&#60;/label>
+    &#60;div class="col-md-6">
+    &#60;label asp-for="Term">Monthly&#60;/label>
+    &#60;input id="monthly" asp-for="Term" value="&#64;Model.Term" type="number" class="form-control" aria-label="Monthly">
+                &#60;/div>
+    &#60;div class="col-md-6">
+    &#60;label>Yearly&#60;/label>
+    &#60;input id="yearly" asp-for="Yearly" value="&#64;Model.Yearly" type="number" step="any" class="form-control" aria-label="Yearly">
+                &#60;/div>
+            &#60;/div>
+        &#60;/div>
+    &#60;div class="col">
+    &#60;label asp-for="Rate">Fixed Interest Rate&#60;/label>
+    &#60;input id="rate" asp-for="Rate" value="&#64;Model.Rate" step="0.1" type="number" class="form-control" aria-label="Rate">
+        &#60;/div>
+    &#60;div class="row m-0 p-0">
+    &#60;div class="col-md-6 mt-2">
+    &#60;label style="display: none;">Extra Monthly Payments&#60;/label>
+    &#60;input style="display: none;" id="extraPayment" type="number" value="0" class="form-control" aria-label="Extra Payments">
+            &#60;/div>
+    &#60;div class="col-md-3 d-flex justify-content-start justify-content-md-end mt-3">
+    &#60;button type="submit" id="btnSubmit" class="btn btn-outline-success btn-lg">Calculate&#60;/button>
+            &#60;/div>
+    &#60;div class="col-md-3 d-flex justify-content-start justify-content-md-end mt-3">
+    &#60;button type="button" id="btnReset" class="btn btn-outline-success btn-lg">Reset&#60;/button>
+            &#60;/div>
+        &#60;/div>
+    &#60;/form>
+&#60;/div>
+    &#60;div class="col">
+    &#60;form id="formHeader" class="row row-cols-1 gy-2 gx-3">
+    &#60;div class="col-12 text-center">
+    &#60;p>&#60;i>Your Monthly Payments&#60;/i>&#60;/p>
+        &#60;/div>
+    &#60;div class="col-12 text-center mb-2">
+    &#60;div>&#60;span id="monthlyPayment" class="fw-bold fs-1">&#64;Model.Payment.ToString("C")&#60;/span>&#60;/div>
+        &#60;/div>
+    &#60;div class="col-6">
+    &#60;span>Total Principal:&#60;/span>
+        &#60;/div>
+    &#60;div class="col-6">
+    &#60;span id="totalPrincipal">&#64;Model.Amount.ToString("C")&#60;/span>
+        &#60;/div>
+    &#60;div class="col-6">
+    &#60;span>Total Interest&#60;/span>
+        &#60;/div>
+    &#60;div class="col-6">
+    &#60;span id="totalInterest">&#64;Model.TotalInterest.ToString("C")&#60;/span>
+        &#60;/div>
+    &#60;div class="col-6">
+    &#60;span>Total Cost&#60;/span>
+        &#60;/div>
+    &#60;div class="col-6">
+    &#60;span id="totalCost" class="fw-bold">&#64;Model.TotalCost.ToString("C")&#60;/span>
+        &#60;/div>
+    &#60;/form>
+    &#60;div class="mt-5">
+        Note: This does not include PMI, Property Taxes, Home Insurance, HOA and other fees.
+        For a detailed cost analysis, visit the &#60;a href="https://usmortgagecalculator.org/" target="_blank">US Mortgage Calculator&#60;/a>.
+    &#60;/div>
+&#60;/div>
+&#60;/div>
+    &#60;div class="chart">
+&#60;!-- &#60;canvas id="myChart">&#60;/canvas> -->
+&#60;/div>
+    &#60;hr>
+        &#64;if (Model.Payments.Count > 0)
+        {
+        &#60;div class="col-12">
+        &#60;table class="table table-striped table-sm">
+        &#60;thead class="theadbg text-light">
+        &#60;tr>
+        &#60;th>Month&#60;/th>
+        &#60;th>Payment&#60;/th>
+        &#60;th>Principal&#60;/th>
+        &#60;th>Interest&#60;/th>
+        &#60;th>Accrued Interest&#60;/th>
+        &#60;th>Balance&#60;/th>
+            &#60;/tr>
+            &#60;/thead>
+        &#60;tbody id="results">
+                &#64;foreach (var item in Model.Payments)
+            {
+            &#60;tr>
+            &#60;td>&#64;item.Month&#60;/td>
+            &#60;td>&#64;item.Payment.ToString("C")&#60;/td>
+            &#60;td>&#64;item.MonthlyPrincipal.ToString("C")&#60;/td>
+            &#60;td>&#64;item.MonthlyInterest.ToString("C")&#60;/td>
+            &#60;td>&#64;item.TotalInterest.ToString("C")&#60;/td>
+            &#60;td>&#64;item.Balance.ToString("C")&#60;/td>
+            &#60;/tr>
+            }
+            &#60;/tbody>
+        &#60;/table>
+        &#60;h5 id="codeLink">&#60;/h5>
+    &#60;/div> 
+                }
+&#60;/div>
+                </code>
+            </pre>
+                <h4 class="mt-4 pt-4">The Controller</h4>
+                <pre class="line-numbers">
+                <code class="language-javascript">
+[HttpGet]
+public IActionResult App() 
+{
+    Loan loan = new();
+    loan.Payment = 0.0m;
+    loan.TotalInterest= 0.0m;
+    loan.TotalCost= 0.0m;
+    loan.Rate = 1.0m;
+    loan.Amount = 150000m;
+    loan.Term = 60;
+    loan.Yearly = 5;
+
+    return View(loan);
+}
+
+[HttpPost]
+[ValidateAntiForgeryToken]
+public IActionResult App(Loan loan)
+{
+    var loanHelper = new LoanHelper();
+    Loan newLoan = loanHelper.GetPayments(loan);
+
+    return View(newLoan);
+}
+
+[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+public IActionResult Error()
+{
+    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+}
+                </code>
+            </pre>
+                <h4 class="mt-4 pt-4">The Helper Class</h4>
+                <pre class="line-numbers">
+                <code class="language-javascript">
+namespace MortgageCalculatorMVC.Helpers
+{
+    public class LoanHelper
+    {
+        public Loan GetPayments(Loan loan)
+        {
+            //Calculate my Monthly Payment
+            loan.Payment = CalcPayment(loan.Amount, loan.Rate, loan.Term);
+
+            // Create a loop from 1 to the term
+            var balance = loan.Amount;
+            var totalInterest = 0.0m;
+            var monthlyInterest = 0.0m;
+            var monthlyPrincipal = 0.0m;
+            var monthlyRate = CalcMonthlyRate(loan.Rate);
+
+            //loop over each month until i reach the term of the loan
+            for &#40;int month = 1; month <= loan.Term; month++)
+            {
+                monthlyInterest = CalcMonthlyInterest(balance, monthlyRate);
+                totalInterest += monthlyInterest;
+                monthlyPrincipal = loan.Payment - monthlyInterest;
+                balance -= monthlyPrincipal;
+
+                LoanPayment loanPayment = new();
+
+                loanPayment.Month = month;
+                loanPayment.Payment = loan.Payment;
+                loanPayment.MonthlyPrincipal = monthlyPrincipal;
+                loanPayment.MonthlyInterest = monthlyInterest;
+                loanPayment.TotalInterest = totalInterest;
+                loanPayment.Balance = balance;
+
+                //push the object into the Loan Model
+                loan.Payments.Add(loanPayment);
+
+            }
+
+            loan.TotalInterest = totalInterest;
+            loan.TotalCost = loan.Amount + totalInterest;
+            loan.Yearly = (loan.Term / 12);
+            //return the loan to the view
+            return loan;
+
+
+        }
+
+        private decimal CalcPayment(decimal amount, decimal rate, int term)
+        {
+            var monthlyRate = CalcMonthlyRate(rate);
+            var rateD = Convert.ToDouble(rate);
+            var amountD = Convert.ToDouble(amount);
+
+            var paymentD = (amountD * (rateD/1200)) / (1 - Math.Pow(1 + rateD / 1200, -term));
+
+
+            return Convert.ToDecimal(paymentD);
+        }
+
+
+        private decimal CalcMonthlyRate(decimal rate)
+        {
+            return rate / 1200;
+        }
+
+        private decimal CalcMonthlyInterest(decimal balance, decimal monthlyRate)
+        {
+            return balance * monthlyRate;
+        }
+
+    }
+}
+                </code>
+            </pre>
+            </div>
+            <div class="col-lg-4">
+                <h4 class="mt-4 pt-4">This code is structured using the MVC model.</h4>
+                <h5 class="mt-4 pt-4">The Model</h5>
+                <p>
+                    The model represents the database. It defines the database table as well
+                    as the columns. The perameters are set in the class, and translated
+                    into SQL on the server side.
+                </p>
+                <h5 class="mt-4 pt-4">The View</h5>
+                <p>
+                    The view is a web page that displays the data and is the interface
+                    between the user and the applicaiton. It uses a combination of HTML,
+                    CSS, Javasctipt and C# to display the web page.
+                </p>
+                <h5 class="mt-4 pt-4">The Controller</h5>
+                <p>
+                    When the view, or web page is interacted with by the user, the controller
+                    is consulted to determine the action to be taken. In this case, the user
+                    enters data in a form, and when the button is clicked, the controller
+                    executes the appropriate action determined by the code. It communicates between
+                    the model and the view. The controller also exectues any commands on the
+                    back end database as dictated by the code. In this example, the controller recieves
+                    the data entered in the form, executes the function to process the data
+                    entered, communicates with the database to make the designated changes,
+                    then sends the result back to the view and displays it.
+                </p>
+                <h5 class="mt-4 pt-4">The Helper Class</h5>
+                <p>
+                    The helper class separates the logic from the controller. This practice
+                    keeps the code cleaner and more maintainable, and implements the
+                    principal of "Separation of Concerns". The controller is the go-between
+                    for the view and models, and should be used to call all the necessary
+                    methods to run the app. Although th logic can be included in the conroller,
+                    it is a best practice to separate the logic from the controller where
+                    appropriate.
+                </p>
+            <h5>Please <a href="https://davidbellerose.com/#contact" target="_blank" alt="Contact Me">contact me</a> if you have any questions and/or would like to discuss
+                my skill set and qualifications.
+            </h5>
+            </div>
+        </div>
+    </div>
+</main>

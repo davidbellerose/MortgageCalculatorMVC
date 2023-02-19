@@ -1,0 +1,16 @@
+﻿using System.Collections.Generic;
+
+namespace MortgageCalculatorMVC.Models
+{
+    public class Loan
+    {
+        public decimal Amount { get; set; }
+        public decimal Rate { get; set; }
+        public int Term { get; set; }
+        public int Yearly { get; set; }
+        public decimal Payment { get; set; }
+        public decimal TotalInterest { get; set; }
+        public decimal TotalCost { get; set; }
+        public List<LoanPayment> Payments { get; set; } = new List<LoanPayment>();
+    }
+}
