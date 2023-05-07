@@ -21,7 +21,7 @@ footer .social > a:hover {
 }
 
 .sticky-footer {
-  position: absolute;
+  position: static;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -182,4 +182,8 @@ pre[class*=language-] {
 
 .theadbg {
   background-color: #033762;
+}
+
+.app-footer {
+  min-height: 100px;
 }
