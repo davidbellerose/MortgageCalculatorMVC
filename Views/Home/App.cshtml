@@ -1,7 +1,7 @@
 ﻿@model MortgageCalculatorMVC.Models.Loan
 
 
-<main class="flex-shrink-0 mt-0 p-3">
+<main class="flex-shrink-0 mt-3 p-3">
     <div class="container mt-0 p-0">
         <div class="row row-cols-1 row-cols-md-2">
             <div class="col">
@@ -53,7 +53,7 @@
                         <span>Total Principal:</span>
                     </div>
                     <div class="col-6">
-                        <span id="totalPrincipal">@Model.Amount.ToString("C")</span>
+                        <span id="totalPrincipal">$@Model.Amount.ToString("#.##")</span>
                     </div>
                     <div class="col-6">
                         <span>Total Interest</span>
