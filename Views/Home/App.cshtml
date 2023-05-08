@@ -47,7 +47,7 @@
                         <p><i>Your Monthly Payments</i></p>
                     </div>
                     <div class="col-12 text-center mb-2">
-                        <div><span id="monthlyPayment" class="fw-bold fs-1">@Model.Payment.ToString("C")</span></div>
+                        <div><span id="monthlyPayment" class="fw-bold fs-1">@Model.Payment.ToString("#,###,###.##")</span></div>
                     </div>
                     <div class="col-6">
                         <span>Total Principal:</span>
@@ -59,13 +59,13 @@
                         <span>Total Interest</span>
                     </div>
                     <div class="col-6">
-                        <span id="totalInterest">@Model.TotalInterest.ToString("C")</span>
+                        <span id="totalInterest">$@Model.TotalInterest.ToString("#,###,###.##")</span>
                     </div>
                     <div class="col-6">
                         <span>Total Cost</span>
                     </div>
                     <div class="col-6">
-                        <span id="totalCost" class="fw-bold">@Model.TotalCost.ToString("C")</span>
+                        <span id="totalCost" class="fw-bold">$@Model.TotalCost.ToString("#,###,###.##")</span>
                     </div>
                 </form>
                 <div class="mt-5">
@@ -94,11 +94,11 @@
                         {
                             <tr>
                                 <td>@item.Month</td>
-                                <td>@item.Payment.ToString("C")</td>
-                                <td>@item.MonthlyPrincipal.ToString("C")</td>
-                                <td>@item.MonthlyInterest.ToString("C")</td>
-                                <td>@item.TotalInterest.ToString("C")</td>
-                                <td>@item.Balance.ToString("C")</td>
+                                <td>@item.Payment.ToString("#,###,###.##")</td>
+                                <td>@item.MonthlyPrincipal.ToString("#,###,###.##")</td>
+                                <td>@item.MonthlyInterest.ToString("#,###,###.##")</td>
+                                <td>@item.TotalInterest.ToString("#,###,###.##")</td>
+                                <td>@item.Balance.ToString("#,###,###.##")</td>
                             </tr>
                         }
                     </tbody>
