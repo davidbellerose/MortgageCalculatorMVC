@@ -2,11 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MortgageCalculatorMVC.Helpers;
 using MortgageCalculatorMVC.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MortgageCalculatorMVC.Controllers
 {
@@ -34,12 +30,12 @@ namespace MortgageCalculatorMVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult App() 
+        public IActionResult App()
         {
             Loan loan = new();
             loan.Payment = 0.0m;
-            loan.TotalInterest= 0.0m;
-            loan.TotalCost= 0.0m;
+            loan.TotalInterest = 0.0m;
+            loan.TotalCost = 0.0m;
             loan.Rate = 1.0m;
             loan.Amount = 150000m;
             loan.Term = 60;

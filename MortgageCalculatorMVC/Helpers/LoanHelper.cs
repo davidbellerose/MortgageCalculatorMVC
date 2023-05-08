@@ -54,7 +54,7 @@ namespace MortgageCalculatorMVC.Helpers
             var rateD = Convert.ToDouble(rate);
             var amountD = Convert.ToDouble(amount);
 
-            var paymentD = (amountD * (rateD/1200)) / (1 - Math.Pow(1 + rateD / 1200, -term));
+            var paymentD = (amountD * (rateD / 1200)) / (1 - Math.Pow(1 + rateD / 1200, -term));
 
 
             return Convert.ToDecimal(paymentD);
