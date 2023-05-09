@@ -1,5 +1,5 @@
 # Mortgage Calculator: A Coding Project
-## An ASP.NET C# program that provides loan information.
+## An ASP.NET C# application to calculate loan payments, payoff, and amortization schedule.
 
     - CSS SASS Bootstrap Layout
     - ASP.NET MVC
