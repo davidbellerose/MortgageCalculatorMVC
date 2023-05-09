@@ -12,7 +12,7 @@
     - C# Boolean Logic
  
 
-<img src="https://davidbellerose.com/assets/img/html5-badge.webp" alt="alt text" title="image Title" height="25" />
+<img src="https://davidbellerose.com/assets/img/html5-badge.webp" alt="alt text" title="image Title" height="35" />
 
 
  
