@@ -30,4 +30,4 @@
  
  [Go To Website](https://mortgage-calculator-asp-net.up.railway.app/)
 
- [Go To Javascript Version](https://github.com/daveyedgar/MortgageCalculator/)
+ [Go To Javascript Version](https://github.com/davidbellerose/MortgageCalculator/)
