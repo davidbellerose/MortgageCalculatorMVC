@@ -47,7 +47,7 @@
                         <p><i>Your Monthly Payments</i></p>
                     </div>
                     <div class="col-12 text-center mb-2">
-                        <div><span id="monthlyPayment" class="fw-bold fs-1">@Model.Payment.ToString("#,###,###.##")</span></div>
+                        <div><span id="monthlyPayment" class="fw-bold fs-1">@Model.Payment.ToString("C")</span></div>
                     </div>
                     <div class="col-6">
                         <span>Total Principal:</span>
@@ -94,7 +94,7 @@
                         {
                             <tr>
                                 <td>@item.Month</td>
-                                <td>@item.Payment.ToString("#,###,###.##")</td>
+                                <td>@item.Payment.ToString("C")</td>
                                 <td>@item.MonthlyPrincipal.ToString("#,###,###.##")</td>
                                 <td>@item.MonthlyInterest.ToString("#,###,###.##")</td>
                                 <td>@item.TotalInterest.ToString("#,###,###.##")</td>
