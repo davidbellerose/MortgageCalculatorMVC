@@ -52,7 +52,7 @@
                         <p><i>Your Monthly Payments</i></p>
                     </div>
                     <div class="col-12 text-center mb-2">
-                        <div><span id="monthlyPayment" class="fw-bold fs-1">@Model.Payment.ToString("C", CultureInfo.CurrentCulture)</span></div>
+                        <div><span id="monthlyPayment" class="fw-bold fs-1">@Model.Payment.ToString("C", CultureInfo.CreateSpecificCulture("en-US")))</span></div>
                     </div>
                     <div class="col-6">
                         <span>Total Principal:</span>

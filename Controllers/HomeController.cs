@@ -52,8 +52,6 @@ namespace MortgageCalculatorMVC.Controllers
             var loanHelper = new LoanHelper();
             Loan newLoan = loanHelper.GetPayments(loan);
 
-            ViewData["USC"] = new CultureInfo("en-US");
-
             return View(newLoan);
         }
 
