@@ -1,5 +1,6 @@
 ﻿using MortgageCalculatorMVC.Models;
 using System;
+using System.Globalization;
 
 namespace MortgageCalculatorMVC.Helpers
 {
@@ -9,6 +10,8 @@ namespace MortgageCalculatorMVC.Helpers
         {
             //Calculate my Monthly Payment
             loan.Payment = CalcPayment(loan.Amount, loan.Rate, loan.Term);
+
+            
 
             // Create a loop from 1 to the term
             var balance = loan.Amount;

@@ -1,5 +1,10 @@
-﻿@model MortgageCalculatorMVC.Models.Loan
+﻿@using System.Globalization;
+@model MortgageCalculatorMVC.Models.Loan
 
+@{
+    // var unitedStatesEnglishCulture = new CultureInfo("en-US");
+    var usc = ViewData["USC"];
+}
 
 <main class="flex-shrink-0 mt-3 p-3">
     <div class="container mt-0 p-0">
@@ -47,7 +52,7 @@
                         <p><i>Your Monthly Payments</i></p>
                     </div>
                     <div class="col-12 text-center mb-2">
-                        <div><span id="monthlyPayment" class="fw-bold fs-1">$@Model.Payment.ToString("C")</span></div>
+                        <div><span id="monthlyPayment" class="fw-bold fs-1">@Model.Payment.ToString("C", CultureInfo.CurrentCulture)</span></div>
                     </div>
                     <div class="col-6">
                         <span>Total Principal:</span>

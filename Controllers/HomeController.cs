@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using MortgageCalculatorMVC.Helpers;
 using MortgageCalculatorMVC.Models;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace MortgageCalculatorMVC.Controllers
 {
@@ -50,6 +51,8 @@ namespace MortgageCalculatorMVC.Controllers
         {
             var loanHelper = new LoanHelper();
             Loan newLoan = loanHelper.GetPayments(loan);
+
+            ViewData["USC"] = new CultureInfo("en-US");
 
             return View(newLoan);
         }
