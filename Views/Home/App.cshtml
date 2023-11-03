@@ -54,19 +54,19 @@
                         <span>Total Principal:</span>
                     </div>
                     <div class="col-6">
-                        <span id="totalPrincipal">$@Model.Amount.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))</span>
+                        <span id="totalPrincipal">@Model.Amount.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))</span>
                     </div>
                     <div class="col-6">
                         <span>Total Interest</span>
                     </div>
                     <div class="col-6">
-                        <span id="totalInterest">$@Model.TotalInterest.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))</span>
+                        <span id="totalInterest">@Model.TotalInterest.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))</span>
                     </div>
                     <div class="col-6">
                         <span>Total Cost</span>
                     </div>
                     <div class="col-6">
-                        <span id="totalCost" class="fw-bold">$@Model.TotalCost.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))</span>
+                        <span id="totalCost" class="fw-bold">@Model.TotalCost.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))</span>
                     </div>
                 </form>
                 <div class="mt-5">
