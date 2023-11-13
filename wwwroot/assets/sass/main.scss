@@ -13,61 +13,73 @@ body {
     min-height: 100%;
 }
 
-nav{
-  background-color: var(--dark-color);
+nav {
+    background-color: var(--dark-color);
 }
 
 
-h1,h2,h3,h4,h5,h6{
-  color: var(--primary-color);
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+}
+
+.logo {
+    margin-top: 2rem;
+    width: 600px;
+    height: auto;
+    //border: 5px solid #0e6f93;
+    //padding: 5px;
+    box-shadow: -4px 5px 11px -1px rgba(0,0,0,0.54);
+    -webkit-box-shadow: -4px 5px 11px -1px rgba(0,0,0,0.54);
+    -moz-box-shadow: -4px 5px 11px -1px rgba(0,0,0,0.54);
 }
 
 main .container {
-  padding: 60px 15px 0;
-  margin-bottom: 5rem;
+    padding: 60px 15px 0;
+    margin-bottom: 5rem;
 }
 
 .checklist > li i {
     color: #79ccff;
 }
 
-.project-icons img{
-  height: 50px;
-  width: auto;
+.project-icons img {
+    height: 50px;
+    width: auto;
 }
 
 code[class*="language-"],
 pre[class*="language-"] {
-white-space: pre-wrap;
-word-break: normal;
-word-wrap: normal;
+    white-space: pre-wrap;
+    word-break: normal;
+    word-wrap: normal;
 }
 
-.about-value{
-  color: blue;
+.about-value {
+    color: blue;
 }
 
-.round-value{
-  color: #FF70FF;
-  color: red;
+.round-value {
+    color: #FF70FF;
+    color: red;
 }
 
-.roundabout{
-  font-weight: bold;
-  color: orange;
-}
-.font-normal{
-  font-weight: 400;
+.roundabout {
+    font-weight: bold;
+    color: orange;
 }
 
-.bg-gray{
-  background-color: #e7e7e7;
+.font-normal {
+    font-weight: 400;
 }
 
-.theadbg{
-  background-color: #033762;
+.bg-gray {
+    background-color: #e7e7e7;
 }
 
-.app-footer{
+.theadbg {
+    background-color: #033762;
+}
+
+.app-footer {
     min-height: 100px;
 }

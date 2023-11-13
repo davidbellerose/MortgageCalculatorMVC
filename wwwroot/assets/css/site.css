@@ -137,6 +137,15 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--primary-color);
 }
 
+.logo {
+  margin-top: 2rem;
+  width: 600px;
+  height: auto;
+  box-shadow: -4px 5px 11px -1px rgba(0, 0, 0, 0.54);
+  -webkit-box-shadow: -4px 5px 11px -1px rgba(0, 0, 0, 0.54);
+  -moz-box-shadow: -4px 5px 11px -1px rgba(0, 0, 0, 0.54);
+}
+
 main .container {
   padding: 60px 15px 0;
   margin-bottom: 5rem;
